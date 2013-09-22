@@ -700,3 +700,18 @@ body
 	height:50px;
 	background-color: #3498DB;
 }
+
+#listauploadImageFromDisk  li 
+{
+	width:96%;
+}
+
+#listauploadImageFromDisk  a
+{
+	float:left;
+	margin:2px;
+}
+.listauploadImageFromDisk {
+	width: 60px;
+
+}

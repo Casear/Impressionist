@@ -195,11 +195,18 @@
               <div class="modal-body">
                 <p>Paste Image URL</p>
                 <input type="text" id="imageinput" class="image-input"> </input>
+                <p>Load from disk</p>
+                <input id="uploadImageFromDisk" type="file" name="Imagen"> 
                 <p> Preview Will appear below</p>
                 <img id="previewimg"></img>
+                <p> Images from Storage</p>
+                <div id="listauploadImageFromDisk">
+                <ul class='nav nav-list'>
+                </ul>
+                </div>
               </div>
               <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
                 <a href="#" class="btn btn-primary" id="appendimagebtn"> <i class="icon-plus"></i> &nbsp; Add</a>
               </div>
         </div>
@@ -351,11 +358,14 @@
 
     <script src="js/fbconnectapp.js"></script>
     <script src="js/main.js"></script>
+    <script src ="js/loadImage.js"></script>
     <script src ="js/startup.js"></script>
     <!--[if lt IE 8]>
       <script src="js/icon-font-ie7.js"></script>
       <script src="js/icon-font-ie7-24.js"></script>
     <![endif]-->
+
+
 
 
 

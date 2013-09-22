@@ -1,0 +1,105 @@
+<html>
+	<head>
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	</head>
+	<body>
+	<img id="img" width=200px height=200px>
+	<input id="upload" type="file" name="somename" size="chars"> 
+	<div id="lista"></div>
+		
+	
+	
+	<script>
+		var miclick;
+		function createList () {
+			var storageFiles = JSON.parse(localStorage.getItem("storageFiles"));
+			if ($.isPlainObject(storageFiles)) {
+					$("#lista").html("<ul>")
+					var i=0;
+					$.each(storageFiles,function(key,val){
+						$("#lista").append("<li id='img_"+i+"'>"+key+"</li>");
+						$( " #img_"+i ).bind( "click", function() {click(key)});
+						i++;
+						
+					});
+					$("#lista").append("</ul>")
+					
+			} else {
+					$("#lista").html("No hay imagenes en el almacen multimedia");
+				
+			}
+			
+		}
+		
+		function click(val){
+				var storageFiles = JSON.parse(localStorage.getItem("storageFiles"));
+				img.setAttribute("src", storageFiles[val]);
+				miclick=true;
+		}
+		
+		
+		function readURL(input) {
+
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#img').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		
+		$( "#upload" ).change(function() {
+						
+			var storageFiles = JSON.parse(localStorage.getItem("storageFiles")) || {},
+			  img = document.getElementById("img"),
+			  storageFilesDate = storageFiles.date,
+			  input = this;
+			  miclick = false;
+			  
+			  
+	
+						  
+		      if (typeof(storageFiles[this.files[0].name]) == "undefined"   ) {
+					img.addEventListener("load", function () {
+						if (!miclick){
+						    var imgCanvas = document.createElement("canvas"),
+							imgContext = imgCanvas.getContext("2d");
+
+							// Make sure canvas is as big as the picture
+							imgCanvas.width = img.width;
+							imgCanvas.height = img.height;
+
+							// Draw image into canvas element
+							imgContext.drawImage(img, 0, 0, img.width, img.height);
+
+							// Save image as a data URL
+							storageFiles[input.files[0].name] = imgCanvas.toDataURL(input.files[0].type);
+
+							// Save as JSON in localStorage
+							try {
+								localStorage.setItem("storageFiles", JSON.stringify(storageFiles));
+								createList ();
+							}
+							catch (e) {
+								console.log("Storage failed: " + e);                
+							}
+						  }
+						}, false);
+						readURL(this);
+						
+
+				}
+			else {
+					// Use image from localStorage
+					img.setAttribute("src", storageFiles[input.files[0].name]);
+			}
+
+		});
+		createList ();
+	</script>
+	</body>
+</html>
