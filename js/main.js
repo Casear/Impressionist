@@ -453,17 +453,28 @@ Impressionist.prototype =
 	{
 		_transform = me.selectedElement.css("-webkit-transform");
 		$("#play").css("-webkit-transform", _transform);
+		//$("#play").css("-webkit-transform", "");
+
 		$("#play").css("display", "block");
 		$("#play").width ( me.selectedElement.width());
 		//$("#play").height( me.selectedElement.height());
-		$("#play").css("left",   me.selectedElement.position().left+"px");
-		$("#play").css("top", 	 me.selectedElement.position().top+"px");
+		$("#play").css("left",   me.selectedElement.css("left"));
+		$("#play").css("top", 	 me.selectedElement.css("top"));
 		$("#spandelete").on("click", function(e)
 		{
 			e.stopPropagation();
 			me.selectedElement.remove();
 			$("#play").css("display", "none");
 		})
+		$("#divedit").on("click", function(e)
+		{
+			e.stopPropagation();
+			var div = me.selectedElement;
+			$("#editcode").val(div.html());
+			me.openEditCodeWindow();
+			//alert(div.html());
+		})
+
 	},
 	setMenuControlValues : function( el )
 	{
@@ -898,6 +909,21 @@ Impressionist.prototype =
 		me.selectedElement.removeClass("slidelementh1");
 		me.selectedElement.removeClass("slidelementh3");
 	},
+	openEditCodeWindow : function()
+	{
+		
+		//hljs.tabReplace = '    '; // 4 spaces
+		//$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+		//me.autoFormat();
+		$("#saveEditCode").click(function(){
+			var ele = me.selectedElement;
+			var txt = $("#editcode").val();
+			ele.html(txt);
+			
+		});
+		$("#editcodemodal").modal("show");
+	},
+
 	openCodeExportWindow : function()
 	{
 		me.generateExportMarkup();

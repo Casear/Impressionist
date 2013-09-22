@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
-     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+     <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
      <link rel="icon" type="image/ico" href="images/favicon.ico" />
     <!-- Loading Flat UI -->
     <link href="css/flat-ui.css" rel="stylesheet">
@@ -16,7 +16,7 @@
     <link href="css/colorpicker.css" rel="stylesheet">
     <link href="css/freetrans.css" rel="stylesheet">
     <link href="css/codemirror.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
 
     <!-- webfonts -->
 
@@ -133,12 +133,14 @@
               </div>
                 <span id="play">
                     <span class="rotate label label-disabled" id="spanrotate"><i class="icon-rotate-left"></i></span>
-                    <!--<span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>-->
+                    <span class="scale label label-important"><i class="icon-resize-horizontal"></i></span>
                     <span class="skewx label label-disabled" id="spanskewx"><i class="icon-resize-horizontal"></i></span>
                     <span class="skewy label label-disabled" id="spanskewy"><i class="icon-resize-vertical"></i></span>
+                    <span class="divedit label label-success" id="divedit"><i class="icon-edit"></i></span>
                     <span class="deleteicon label label-important" id="spandelete"><i class="fui-cross-16"></i></span>
+                    <span class="move label label-important" id="spanmove"><i class="icon-move"></i></span>
 
-           <!-- <span class="move">move</span>-->
+           
                </span>
           </div>
         </div>
@@ -270,6 +272,24 @@
                 <a href="#" class="btn">Close</a>
               </div>
         </div>
+          <!-- Code Edit Code Modal -->
+          <div class="modal hide fade modalwindow" id="editcodemodal">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+                <h3>Edit Code</h3>
+              </div>
+              <div class="modal-body" id="exportcode" >
+                <p style="width:400px; font-size:130%; color:black"> Write your html code<h3>
+                <textarea rows="3" id="editcode"></textarea>
+              </div>
+              <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="saveEditCode">Save</a>
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+              </div>
+        </div>
+
+
         <!-- End of new preso modal-->
 
           <!-- Style selection Modal -->
@@ -311,7 +331,7 @@
     <!-- Load JS here for greater good =============================-->
    
     <script src="js/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/matrix.js"></script>
     <script src="js/knob.js"></script>
     <script src="js/jquery.dropkick-1.0.0.js"></script>

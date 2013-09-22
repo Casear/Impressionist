@@ -81,6 +81,8 @@
 		
 		// permanent transformation
 		this.display = new Matrix();
+		
+		this.first = true;
 
 		// temp transformation during move, added to display on release
 		this.current = new Matrix();
@@ -105,6 +107,7 @@
 
 			var handle = closest('span', e.target);
 			var play = this.play;
+			
 
 			// store some vectors (see further below) for move calcs
 			this.center = new Vector(
@@ -114,6 +117,15 @@
 
 			this.anchor = new Vector(ev.clientX, ev.clientY);			
 			this.offset = this.anchor.subtract(this.center);
+
+			var cssmatrix = me.selectedElement.css("-webkit-transform");
+				if (cssmatrix != "none") {
+					var b=/matrix\(\s*([0-9\.\+\-]+),\s*([0-9\.\+\-]+),\s*([0-9\.\+\-]+),\s*([0-9\.\+\-]+),\s*([0-9\.\+\-]+),\s*([0-9\.\+\-]+)\)/i.exec(cssmatrix);
+					
+					this.display.base = [parseFloat(b[1]), parseFloat(b[2]), parseFloat(b[5]), parseFloat(b[3]), parseFloat(b[4]), parseFloat(b[6])];
+				} else {
+					this.display = new Matrix();
+			}
 
 			this.mode = handle.className;
 		},
@@ -137,7 +149,10 @@
 			var center = this.center;
 			var anchor = this.anchor;
 			var offset = this.offset;
+			//var matrix = this.display;
 			var matrix = this.display;
+			
+			
 
 			/**
 			 * transform the current matrix based on the mode (classname) of the dragged handle
@@ -228,6 +243,8 @@
 			var state = this.current.toArray().map(function(n) {
 				return (parseInt(n, 10) !== n)? n.toFixed(FIXED) : n;
 			}).join(',');
+			
+			
 
 			
 			this.render(this.display);
@@ -254,7 +271,7 @@
 		render: function(matrix) {
 			var css = Style.toCSS(matrix, FIXED);
 			//this.out.innerHTML = css;
-			
+			this.first = true;
 			//$(editedobject).css("-webkit-transform", css);
 		},
 

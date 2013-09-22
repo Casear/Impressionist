@@ -334,8 +334,9 @@ body
 }
 .slidelement
 {
-	white-space: nowrap;
+	white-space: pre;
 	height: 100px;
+	max-width: 1022px;
 }
 .slidelementh1
 {
