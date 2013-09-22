@@ -1027,7 +1027,30 @@ Impressionist.prototype =
 			image = $("#previewimg").attr("src");
 			me.addImageToSlide( image );
 			$("#imagemodal").modal("hide");
+		});
+		$("#appendbackgroundCbtn").on("click", function( e )
+		{
+			console.log("append image image to background Center");
+			image = $("#previewimg").attr("src");
+			var slide = me.selectedSlide;
+			slide.css("background-image","url("+image+")");
+			slide.css("background-position","center center");
+			slide.css("background-repeat","no-repeat");
+			$("#imagemodal").modal("hide");
+		});
+		$("#appendbackgroundFbtn").on("click", function( e )
+		{
+			console.log("append image to background Full");
+			image = $("#previewimg").attr("src");
+			var slide = me.selectedSlide;
+			slide.css("background-image","url("+image+")");
+			slide.css("background-repeat","no-repeat");
+			slide.css("background-size", "100% 100%");
+
+			$("#imagemodal").modal("hide");
 		})
+
+
 		$("#openpresentationsbtn").on("click", function( e )
 		{
 			$(".previewpresobtn").on("click", function( e )
