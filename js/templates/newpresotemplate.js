@@ -13,7 +13,9 @@ var impress_slide = '<div class="impress-slide" id="impress_slide__slidenumber__
 						'<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Sample Heading </div>'+
                     	'<div class="slidelement slidelementh3" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h3" style="position:absolute; width:auto; height:40px; left:350px; top:120px; whitespace:no-wrap;"> Sample Paragraph </div>'
                 	'</div>';
- var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Sample Heading </div>';
+var text_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__" data-type="h2" style="width:auto; height:60px; position:absolute; left:300px; top:50px; whitespace:no-wrap;" contentEditable="true"> Sample Heading </div>';
+var svg_snippet = '<div class="slidelement slidelementh1" id="slidelement_id" data-parent="impress_slide__slidenumber__"  style="width:auto;  position:absolute; width:105px; left:300px; top:200px; " contentEditable="false"> ##SVG## </div>';
+
  var saved_presentations = '<div class="savedpresos">' +
  								'<div class="presothumbcontent">' +
  								'<h3 style="display:inline-block; color:#2980B9" contentEditable="true"> __presotitle__</h3>'+

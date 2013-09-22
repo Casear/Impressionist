@@ -715,3 +715,9 @@ body
 	width: 60px;
 
 }
+
+#svgselections select {
+	visibility: visible;
+	top:0;
+	
+}

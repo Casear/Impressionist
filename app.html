@@ -24,7 +24,8 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Miltonian' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
-
+    
+     <link href="css/jquery.svg.css" rel="stylesheet">
      <link href="css/custom.css" rel="stylesheet">
    
     <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
@@ -117,6 +118,7 @@
                   <a id="colorpickerbtn" class="btn btn-info" href="#"  data-color-format="hex" data-color="rgb(255, 255, 255)"><i class="icon-tint"></i></a>
                   <a class="btn btn-info toolbarblockleft" id="addtextbtn"  href="#"><i class="icon-font"></i></a>
                   <a class="btn btn-info" id="addimagebtn" href="#"><i class="icon-picture"></i></a>
+                  <a class="btn btn-info" id="addsvgbtn" href="#"><i class="icon-star-empty"></i></a>
                  
                  <!-- <a class="btn btn-primary toolbarblockboth" href="#"><i class="fui-eye-16"></i>&nbsp;Preview</a>
                   <a class="btn btn-warning" href="#"><i class="icon-ok-sign"></i>&nbsp;Save</a>-->
@@ -234,7 +236,7 @@
                 </div>
               </div>
                 <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
                <a href="#" class="btn disabled" id="openpreviewbtn">Open Preview</a>
               </div>
         </div>
@@ -251,7 +253,7 @@
                 <textarea id="descriptioninput" class="descriptioninput"> Sample description of your presentation </textarea>
               </div>
               <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
                 <a href="#" class="btn btn-primary" id="createpresentation"> <i class="icon-plus"></i> &nbsp; Save</a>
               </div>
         </div>
@@ -339,11 +341,75 @@
                   </div>
               </div>
               <div class="modal-footer">
-                <a href="#" class="btn">Close</a>
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
                 <a href="#" class="btn btn-primary" id="applystylebtn"> &nbsp; Apply</a>
               </div>
         </div>
 <!--<a href="#" class="btn small" id="cp4" data-color-format="hex" data-color="rgb(255, 255, 255)">Change background color</a>-->
+
+          <!-- Svg selection Modal -->
+          <div class="modal hide fade modalwindow" id="svgselectionmodal">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>SVG</h3>
+              </div>
+<!--              <div class="modal-body" id="svgselections" style="overflow:scroll;"> -->
+              <div class="modal-body" id="svgselections" >
+			<div class="row">
+				<span class="span3 ">Shape</span>
+				<span class="span3 ">
+				<select id="svgshape">
+					<option value="rect">Rectangle</option><option value="circle">Circle</option>
+					<option value="ellipse">Ellipse</option><option value="line">Line</option>
+					<option value="polyline">Polyline</option><option value="polygon">Polygon</option>
+				</select>
+				</span>
+				<span class="span3">Fill</span>
+				<span class="span3">
+				<select id="svgfill">
+					<option value="red">red</option><option value="yellow">yellow</option>
+					<option value="green">green</option><option value="blue">blue</option>
+					<option value="white">white</option><option value="gray">gray</option>
+					<option value="black">black</option><option value="none">none</option>
+					</select>
+				</span>
+				</div>
+			<div class="row">
+				<span class="span3">Stroke width</span>
+				<span class="span3"><select id="svgswidth">
+					<option value="1">1</option><option value="2">2</option>
+					<option value="3">3</option><option value="4">4</option>
+					<option value="5">5</option><option value="6">6</option>
+					<option value="7">7</option><option value="8">8</option>
+					<option value="9">9</option><option value="10">10</option></select></span>
+				<span class="span3">Stroke</span>
+				<span class="span3"><select id="svgstroke">
+					<option value="red">red</option><option value="yellow">yellow</option>
+					<option value="green">green</option><option value="blue" selected="selected">blue</option>
+					<option value="white">white</option><option value="gray">gray</option>
+					<option value="black">black</option><option value="none">none</option></select></span>
+			</div>
+			<div class="row">
+				<span class="span3">Opacity</span>
+				<span class="span3"><select id="svgsopacity">
+					<option value="1">100%</option><option value="0.9">90%</option>
+					<option value="0.8">80%</option><option value="0.7">70%</option>
+					<option value="0.6">60%</option><option value="0.5">50%</option>
+					<option value="0.4">40%</option><option value="0.3">30%</option>
+					<option value="0.2">20%</option><option value="0.1">10%</option></select>
+				</span>
+			</div>
+			
+			
+              </div>
+              <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+                <a href="#" class="btn btn-primary" id="applysvgbtn"> &nbsp; Apply</a>
+              </div>
+        </div>
+        
+        <div id="theSVG" style='display:"none"'></div>
+
 
     <!-- Load JS here for greater good =============================-->
    
@@ -369,6 +435,7 @@
     <script src="js/fbconnectapp.js"></script>
     <script src="js/main.js"></script>
     <script src ="js/loadImage.js"></script>
+    <script src ="js/jquery.svg.js"></script>
     <script src ="js/startup.js"></script>
     <!--[if lt IE 8]>
       <script src="js/icon-font-ie7.js"></script>

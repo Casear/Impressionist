@@ -1028,6 +1028,59 @@ Impressionist.prototype =
 			me.addImageToSlide( image );
 			$("#imagemodal").modal("hide");
 		});
+		$('#theSVG').svg({onLoad: function(svg) { 
+				me.sketchpad = svg; 
+			} 
+		}); 
+
+
+		$("#addsvgbtn").on("click", function ( e )
+		{
+			console.log("svg btn clicked...");
+						
+			$("#svgselectionmodal").modal("show");
+		})
+		$("#applysvgbtn").on("click", function ( e )
+		{
+			console.log("svg btn clicked...");
+			var sketchpad = me.sketchpad; 
+			var left = 0, top = 0, right = 100, bottom = 100; 
+			var settings = {fill: $('#svgfill').val(), stroke: $('#svgstroke').val(), strokeWidth: $('#svgswidth').val(), opacity: $('#svgsopacity').val()}; 
+			var shape = $('#svgshape').val();
+			var node = null; 
+			if (shape == 'rect') { 
+					node = sketchpad.rect(left, top, right - left, bottom - top, settings); 
+			} 
+			else if (shape == 'circle') { 
+				var r = Math.min(right - left, bottom - top) / 2; 
+				node = sketchpad.circle(left + r, top + r, r, settings); 
+			} 
+			else if (shape == 'ellipse') { 
+				var rx = (right - left) / 2; 
+				var ry = (bottom - top) / 2; 
+				node = sketchpad.ellipse(left + rx, top + ry, rx, ry, settings); 
+			} 
+			else if (shape == 'line') { 
+				node = sketchpad.line(x1, y1, x2, y2, settings); 
+			} 
+			else if (shape == 'polyline') { 
+				node = sketchpad.polyline([[(x1 + x2) / 2, y1], [x2, y2], 
+				[x1, (y1 + y2) / 2], [x2, (y1 + y2) / 2], [x1, y2], 
+				[(x1 + x2) / 2, y1]], $.extend(settings, {fill: 'none'})); 
+			} 
+			else if (shape == 'polygon') { 
+				node = sketchpad.polygon([[(x1 + x2) / 2, y1], [x2, y1], [x2, y2], 
+					[(x1 + x2) / 2, y2], [x1, (y1 + y2) / 2]], settings); 
+			} 
+			//drawNodes[drawNodes.length] = node; 
+    
+						
+			me.addSVGToSlide( me.selectedSlide, sketchpad );
+			$("#svgselectionmodal").modal("hide");
+			sketchpad.remove(node);
+		})
+
+		
 		$("#appendbackgroundCbtn").on("click", function( e )
 		{
 			console.log("append image image to background Center");
@@ -1391,6 +1444,18 @@ Impressionist.prototype =
 		me.selectedSlide.append( $(img) );
 		me.enableDrag();
 	},
+	addSVGToSlide : function( el, svg )
+	{
+		console.log("adding svg", svg.toSVG());
+		item = svg_snippet;
+		item = item.split("slidelement_id").join("slidelement_"+me.generateUID());
+		item = item.replace("##SVG##", svg.toSVG());
+		
+		
+		$(el).append( item );
+		me.enableDrag();
+	},
+
 	removeSlide : function(el)
 	{
 		el.remove();
